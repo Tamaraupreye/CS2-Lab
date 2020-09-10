@@ -165,7 +165,7 @@ struct InstructorFile {
     void printInstructors() {
         for (int i = 0; i < currPtr; i++) {
             cout << left << setw(3) << info[i].id << left << setw(20) << info[i].firstName + " "  + info[i].lastName << " ";
-            cout << left << setw(12) << info[i].title << left << setw(20) << info[i].department << endl;
+            cout << left << setw(23) << info[i].title << left << setw(20) << info[i].department << endl;
         }
         cout << endl;
     }
@@ -305,6 +305,19 @@ struct CourseOfferingFile {
         }
         cout << endl;
     }
+
+    CourseOffering * findCourseOffering(int year, string semester, int courseNo, int sectionNumber) {
+        // linear search because not sure how to do binary search using multiple fields at once
+        for (int i = 0; i < currPtr; i++) {
+            CourseOffering *ans;
+            if (info[i].course->number == courseNo && info[i].year == year && info[i].semester == semester 
+                    && info[i].sectionNumber == sectionNumber) {
+                ans = &info[i];
+                return ans;
+            }
+        }
+        return NULL;
+    }
 };
 
 int main() {
@@ -319,4 +332,6 @@ int main() {
     CourseOfferingFile courseOfferingFile;
     courseOfferingFile.addMultipleCourseOfferings(courseFile, instructorFile);
     courseOfferingFile.printCourseOfferings();
+    CourseOffering *c = courseOfferingFile.findCourseOffering(2020, "Fall", 135, 1);
+    if (c != NULL) cout << c->course->title << " " << c->semester << " " << c->year << endl;
 }

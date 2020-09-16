@@ -10,6 +10,10 @@ struct Course {
     int credit;
 };
 
+void clearScreen(){
+  cout << "\033[2J\033[1;1H";
+}
+
 struct CourseFile {
     int fileSize = 100;
     int currPtr = 0;

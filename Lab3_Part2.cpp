@@ -14,7 +14,8 @@ void clearScreen(){
   cout << "\033[2J\033[1;1H";
 }
 
-struct CourseFile {
+class CourseFile {
+    public:
     int fileSize = 100;
     int currPtr = 0;
     bool sorted = true;
@@ -113,7 +114,8 @@ struct Instructor {
     string department;
 };
 
-struct InstructorFile {
+class InstructorFile {
+    public:
     int fileSize = 100;
     int currPtr = 0;
     bool sorted = true;
@@ -221,7 +223,8 @@ struct CourseOffering {
     string room;
 };
 
-struct CourseOfferingFile {
+class CourseOfferingFile {
+    public:
     int fileSize = 100;
     int currPtr = 0;
     CourseOffering *info = new CourseOffering [fileSize];  // pointer to array

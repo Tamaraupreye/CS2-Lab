@@ -165,11 +165,18 @@ float evaluate(string postfix) {
 int main() {
 	// assume that the parentheses in infix expression are always valid
 	string infix, postfix;
-	cout << "Infix expression: ";
-	cin >> infix;
+	
+	while (true) {
+		clearScreen();
+		cout << "Infix expression (q to quit): ";
+		cin >> infix;
 
-	postfix = toPostfix(infix);
-	cout << endl;
-	cout << "Postfix expression: " << postfix << endl;
-	if (canEvaluate(postfix)) cout << "Evaluated: " << evaluate(postfix) << endl;
+		if (infix == "q") break;
+
+		postfix = toPostfix(infix);
+		cout << endl;
+		cout << "Postfix expression: " << postfix << endl;
+		if (canEvaluate(postfix)) cout << "Evaluated: " << evaluate(postfix) << endl;
+		wait();
+	}
 }

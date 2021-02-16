@@ -91,6 +91,13 @@ bool isOperator(char c) {
 	return (c >= 40 && c <= 43) || (c == 45) || (c == 47);
 }
 
+int prec(char c) { 
+    if (c == '^') return 3; 
+    else if (c == '*' || c == '/') return 2; 
+    else if (c == '+' || c == '-') return 1; 
+    else return -1; 
+}
+
 bool canEvaluate(string postfix) {
 	for (char c: postfix) {
 		if (!(isNumber(c) || isOperator(c))) return false;
@@ -114,21 +121,8 @@ string toPostfix(string infix) {
 		} else if (c == '(') {
 			operatorStack.push(c);
 		} else {
-			// fix this
-			if (c == '+' || c == '-') {
-				while (operatorStack.top() == '*' || operatorStack.top() == '/') {
-					postfix += operatorStack.pop();
-				}
-			}
-			if (c == '-') {
-				while (operatorStack.top() == '+') {
-					postfix += operatorStack.pop();
-				}
-			}
-			if (c == '*') {
-				while (operatorStack.top() == '/') {
-					postfix += operatorStack.pop();
-				}
+			while (operatorStack.top() != '(' and prec(c) <= prec(operatorStack.top())) {
+				postfix += operatorStack.pop();
 			}
 			operatorStack.push(c);
 		}
